@@ -78,14 +78,14 @@
 
 		// Your web app's Firebase configuration
 		var config = {
-			apiKey: "AIzaSyD1ZEqjw2P6sA1BvGULeyfYiEGb8Z1KgM4",
-			authDomain: "chat-22406.firebaseapp.com",
-			databaseURL: "https://chat-22406.firebaseio.com",
-			projectId: "chat-22406",
-			storageBucket: "chat-22406.appspot.com",
-			messagingSenderId: "797836786843",
-			appId: "1:797836786843:web:789d4650eb0cc58b63da3e",
-			measurementId: "G-1WX8QNH79V"
+			apiKey: "AIzaSyC-sZt_04gqaEMLEOwjQjwmQdqU5zP2puo",
+			authDomain: "web-memo-c8f01.firebaseapp.com",
+			databaseURL: "https://web-memo-c8f01.firebaseio.com",
+			projectId: "web-memo-c8f01",
+			storageBucket: "web-memo-c8f01.appspot.com",
+			messagingSenderId: "153292486838",
+			appId: "1:153292486838:web:1da305e2b44b6a55888e17",
+			measurementId: "G-QT4V3RPQZB"
 		};
 		// Initialize Firebase
 		firebase.initializeApp(config);
@@ -101,7 +101,6 @@
 			if (user) {
 				// 인증 성공시
 				console.log('login success!', user);
-				console.log(user);
 				// 메모리스트 출력
 				userInfo = user;
 				get_memo_list();
