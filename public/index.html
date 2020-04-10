@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        .collection {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col s3"
+            style="padding:0; margin:0; overflow-y:auto; overflow-x:hidden; height:1080px; -ms-overflow-style: none;">
+            <!-- Grey navigation panel -->
+            <ul class="collection" style="padding:0; margin:0;"></ul>
+        </div>
+
+        <div class="col s9" style="padding:0; margin:0; max-height:1080px;">
+            <!-- Teal page content  -->
+            <nav>
+                <div class="nav-wrapper">
+                    <div class="col s12">
+                        <a href="#!" class="breadcrumb"><span id="modifyDate"></span></a>
+
+                    </div>
+                </div>
+            </nav>
+
+            <textarea style="height:1000px;" class="textarea" width="100%" rows="1000"
+                placeholder="새로운 메모를 입력해보세요^^"></textarea>
+        </div>
+
+        <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+            <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+        </div>
+
+        <div class="preloader-wrapper big active"
+            style="position:absolute; z-index:1000; left:50%; top:50%; display:none;">
+            <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/3.6.7/firebase.js"></script>
+
+    <script>
+        var auth, database, userInfo;
+
+        // Your web app's Firebase configuration
+        var config = {
+            apiKey: "AIzaSyD1ZEqjw2P6sA1BvGULeyfYiEGb8Z1KgM4",
+            authDomain: "chat-22406.firebaseapp.com",
+            databaseURL: "https://chat-22406.firebaseio.com",
+            projectId: "chat-22406",
+            storageBucket: "chat-22406.appspot.com",
+            messagingSenderId: "797836786843",
+            appId: "1:797836786843:web:789d4650eb0cc58b63da3e",
+            measurementId: "G-1WX8QNH79V"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(config);
+        // firebase.analytics();
+        auth = firebase.auth();
+        database = firebase.database(); // database 초기화
+        var authProvider = new firebase.auth.GoogleAuthProvider();
+        
+        auth.onAuthStateChanged(function(user){
+            if( user ) {
+                // 인증 성공
+                console.log('login success', user);
+                userInfo = user;
+            } else {
+                // 인증 실패
+                auth.signInWithPopup(authProvider);
+            }
+        });
+
+        function get_memo_list() {
+            var memoRef = database.ref( 'memos/' + uid );
+            memoRef.on('child_added', function(data){
+                console.log(data);
+            })
+            /*
+                {
+                    memos: {
+                        uid: { text: '텍스트', 작성일: '작성일', 제목: '제목' },
+                        uid: { text: '텍스트', 작성일: '작성일', 제목: '제목' },
+                        uid: { text: '텍스트', 작성일: '작성일', 제목: '제목' }
+                    }
+                }
+            */
+        }
+    </script>
+
+</body>
+
+</html>
